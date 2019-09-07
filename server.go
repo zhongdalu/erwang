@@ -17,9 +17,9 @@ type ErrorCode struct {
 	Error string `json:"error"`
 }
 
-func Bind(httpUrl, webUrl string) {
+func Bind(httpUrl, wsbUrl string) {
 	public.HttpUrl = httpUrl
-	public.WebUrl = webUrl
+	public.WebUrl = wsbUrl
 	fmt.Println("使用二网平衡调度系统")
 	s := g.Server()
 	s.BindHandler("/", func(r *ghttp.Request) {
