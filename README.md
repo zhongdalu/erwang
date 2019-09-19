@@ -8,18 +8,20 @@
 #### 软件架构
 软件架构说明
 
-
+********************
 #### 安装教程
+go.mod 
 
-1. xxxx
-2. xxxx
-3. xxxx
-
+require gitee.com/sky_big/erwang latest 
 #### 使用说明
+import "gitee.com/sky_big/erwang"
 
-1. xxxx
-2. xxxx
-3. xxxx
+erwang.Bind(config.ErWang.HttpUrl, config.ErWang.WsUrl)
+
+config.ErWang.HttpUrl //接口地址
+
+config.ErWang.WsUrl   //发送命令地址
+********
 
 #### 参与贡献
 
