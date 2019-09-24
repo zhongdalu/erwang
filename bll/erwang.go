@@ -35,7 +35,7 @@ func Transfer() {
 	}
 	for _, p := range data.Data {
 		// 2、	查看p1、p2、p3的差是否有超出范围的 如果有执行下一步
-		if math.Abs(p.P1-p.P2) > p.Cha1 || math.Abs(p.P1-p.P3) > p.Cha1 || math.Abs(p.P3-p.P2) > p.Cha1 {
+		if math.Abs(p.P1-p.P2) < p.Cha1 && math.Abs(p.P1-p.P3) < p.Cha1 && math.Abs(p.P3-p.P2) < p.Cha1 {
 			pa, _ := strconv.ParseFloat(fmt.Sprintf("%.2f", (p.P1+p.P2+p.P3)/3.0), 64)
 			for _, f := range p.Lists {
 				// 3、	将p1的值与当前单元阀的目标值比较 如果超出范围 则执行下一步
@@ -45,7 +45,7 @@ func Transfer() {
 				}
 			}
 		} else {
-			mylog.Error(p.Name + "p1、p2、p3的差未超出范围")
+			mylog.Println(p.Name + "p1、p2、p3的差超出范围,温度尚未稳定")
 		}
 	}
 }
