@@ -11,7 +11,9 @@ import (
 	"github.com/gogf/gf/g/util/gconv"
 	"github.com/gorilla/websocket"
 	"math"
+	"net/url"
 	"strconv"
+	"strings"
 )
 
 // 获取web接口的数据 判断是否需要调平衡 需要的话 发送命令给命令交互
@@ -19,6 +21,10 @@ func Transfer() {
 	bs, err := util.HttpGet(public.HttpUrl)
 	if err != nil {
 		mylog.Error(err)
+		return
+	}
+	err = record()
+	if err != nil {
 		return
 	}
 	var data BsData
@@ -44,6 +50,22 @@ func Transfer() {
 	}
 }
 
+func record() error {
+	u, err := url.Parse(public.HttpUrl)
+	if err != nil {
+		mylog.Error(err)
+		return err
+	} else {
+		urls := "http://" + u.Host + "/api/balance/getzhixing_pingheng"
+		_, err = util.HttpGet(urls)
+		if err != nil {
+			mylog.Error(err)
+			return err
+		}
+	}
+	return nil
+}
+
 func sendCommand(fac, dtu, center, mpno, mod string, value float64) {
 	/*
 		 命令
@@ -54,20 +76,21 @@ func sendCommand(fac, dtu, center, mpno, mod string, value float64) {
 
 		1.手动模式 2 进回水温差 3 进回水均温 4 回水温度
 	*/
-	v := "175," + mpno //["175,01,手动,90.1"]
+	arr := []string{"175", mpno}
 	switch mod {
 	case "1":
-		v += ",手动,"
+		arr = append(arr, "01")
 	case "2":
-		v += ",温差,"
+		arr = append(arr, "02")
 	case "3":
-		v += ",均温,"
+		arr = append(arr, "03")
 	case "4":
-		v += ",回水,"
+		arr = append(arr, "04")
 	default:
-		v += ",,"
+		mylog.Error("未知命令:", mod)
 	}
-	v += gconv.String(value)
+	arr = append(arr, gconv.String(value))
+	v := strings.Join(arr, ",")
 	data := Command{
 		Data: []CommandItem{
 			{
@@ -88,7 +111,7 @@ func sendCommand(fac, dtu, center, mpno, mod string, value float64) {
 
 	c, _, err := websocket.DefaultDialer.Dial(public.WebUrl, nil)
 	if err != nil {
-		mylog.Fatal("dial:", err)
+		mylog.Error("dial:", err)
 	}
 	defer c.Close()
 	err = c.WriteMessage(websocket.TextMessage, bs)

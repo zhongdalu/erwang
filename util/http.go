@@ -12,7 +12,6 @@ import (
 func HttpGet(url string) ([]byte, error) {
 	// 替换空格
 	url = strings.Replace(url, " ", "%20", -1)
-	mylog.Println(url)
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, err
