@@ -3,13 +3,13 @@ package erwang
 
 import (
 	"fmt"
-	"gitee.com/sky_big/erwang/bll"
-	"gitee.com/sky_big/erwang/public"
 	"gitee.com/sky_big/mylog"
 	"github.com/gogf/gf/g"
 	"github.com/gogf/gf/g/net/ghttp"
 	"github.com/gogf/gf/g/os/gcron"
 	"github.com/gogf/gf/g/util/gconv"
+	"github.com/zhongdalu/erwang/bll"
+	"github.com/zhongdalu/erwang/public"
 )
 
 type ErrorCode struct {

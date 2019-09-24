@@ -12,9 +12,9 @@
 #### 安装教程
 go.mod 
 
-require gitee.com/sky_big/erwang latest 
+require github.com/zhongdalu/erwang latest 
 #### 使用说明
-import "gitee.com/sky_big/erwang"
+import "github.com/zhongdalu/erwang"
 
 erwang.Bind(config.ErWang.HttpUrl, config.ErWang.WsUrl)
 

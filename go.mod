@@ -1,4 +1,4 @@
-module gitee.com/sky_big/erwang
+module github.com/zhongdalu/erwang
 
 require (
 	gitee.com/sky_big/mylog v0.0.0-20190906091949-d4c6f1442262
