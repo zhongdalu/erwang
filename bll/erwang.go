@@ -104,7 +104,7 @@ func sendCommand(fac, dtu, center, mpno, mod string, value float64) {
 		OrderID:  10074,
 		Priority: 3,
 		Recopy:   3,
-		Timeout:  40,
+		Timeout:  50,
 		UUID:     util.Rand().Hex(),
 	}
 	bs, _ := json.Marshal(data)
