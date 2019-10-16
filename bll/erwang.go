@@ -11,14 +11,13 @@ import (
 	"github.com/zhongdalu/erwang/public"
 	"github.com/zhongdalu/erwang/util"
 	"math"
-	"net/url"
 	"strconv"
 	"strings"
 )
 
 // 获取web接口的数据 判断是否需要调平衡 需要的话 发送命令给命令交互
 func Transfer() {
-	bs, err := util.HttpGet(public.HttpUrl)
+	bs, err := util.HttpGet(public.HttpUrl + "/api/server/getConduitData")
 	if err != nil {
 		mylog.Error(err)
 		return
@@ -51,17 +50,11 @@ func Transfer() {
 }
 
 func record() error {
-	u, err := url.Parse(public.HttpUrl)
+	urls := public.HttpUrl + "/api/balance/getzhixing_pingheng"
+	_, err := util.HttpGet(urls)
 	if err != nil {
 		mylog.Error(err)
 		return err
-	} else {
-		urls := "http://" + u.Host + "/api/balance/getzhixing_pingheng"
-		_, err = util.HttpGet(urls)
-		if err != nil {
-			mylog.Error(err)
-			return err
-		}
 	}
 	return nil
 }
