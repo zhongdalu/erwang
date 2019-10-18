@@ -72,7 +72,9 @@ func sendCommand(fac, dtu, center, mpno, mod string, value float64) {
 	arr := []string{"175", mpno}
 	switch mod {
 	case "1":
-		arr = append(arr, "01")
+		//arr = append(arr, "01")
+		//手动模式不做处理
+		return
 	case "2":
 		arr = append(arr, "02")
 	case "3":
