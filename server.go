@@ -7,7 +7,6 @@ import (
 	"github.com/gogf/gf/g"
 	"github.com/gogf/gf/g/net/ghttp"
 	"github.com/gogf/gf/g/os/gcron"
-	"github.com/gogf/gf/g/util/gconv"
 	"github.com/zhongdalu/erwang/bll"
 	"github.com/zhongdalu/erwang/public"
 )
@@ -85,20 +84,5 @@ func Bind(httpUrl, wsbUrl string) {
 }
 
 func getCronStr(min int) string {
-	hour := min / 60
-	ms := min % 60
-	hourStr := ""
-	if hour == 0 {
-		hourStr = "*"
-	} else {
-		hourStr = "0-24/" + gconv.String(hour)
-	}
-	minStr := ""
-	if ms == 0 {
-		minStr = "*"
-	} else {
-		minStr = "0-59/" + gconv.String(ms)
-	}
-	sr := fmt.Sprintf("0 %s %s * * *", minStr, hourStr)
-	return sr
+	return fmt.Sprintf("@every %dm", min)
 }
