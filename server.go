@@ -1,12 +1,14 @@
-//@Auth:zdl
+// @Auth:zdl
 package erwang
 
 import (
 	"fmt"
+
 	"gitee.com/sky_big/mylog"
 	"github.com/gogf/gf/g"
 	"github.com/gogf/gf/g/net/ghttp"
 	"github.com/gogf/gf/g/os/gcron"
+
 	"github.com/zhongdalu/erwang/bll"
 	"github.com/zhongdalu/erwang/public"
 )
@@ -19,10 +21,10 @@ type ErrorCode struct {
 func Bind(httpUrl, wsbUrl string) {
 	public.HttpUrl = httpUrl
 	public.WebUrl = wsbUrl
-	fmt.Println("使用二网平衡调度系统")
+	fmt.Println("使用二网平衡系统")
 	s := g.Server()
 	s.BindHandler("/", func(r *ghttp.Request) {
-		r.Response.Writeln("欢迎使用二网平衡调度系统\n版本：V1.0")
+		r.Response.Writeln("二网平衡系统\n版本：V1.0")
 	})
 	type msg struct {
 		Status int `json:"status"`

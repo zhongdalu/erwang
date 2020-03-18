@@ -3,16 +3,18 @@ package bll
 import (
 	"encoding/json"
 	"fmt"
+	"math"
+	"strconv"
+	"strings"
+
 	"gitee.com/sky_big/mylog"
 	"github.com/gogf/gf/g/os/gtime"
 	"github.com/gogf/gf/g/util/gconv"
 	"github.com/gorilla/websocket"
+
 	. "github.com/zhongdalu/erwang/model"
 	"github.com/zhongdalu/erwang/public"
 	"github.com/zhongdalu/erwang/util"
-	"math"
-	"strconv"
-	"strings"
 )
 
 // 获取web接口的数据 判断是否需要调平衡 需要的话 发送命令给命令交互
@@ -72,8 +74,8 @@ func sendCommand(fac, dtu, center, mpno, mod string, value float64) {
 	arr := []string{"175", mpno}
 	switch mod {
 	case "1":
-		//arr = append(arr, "01")
-		//手动模式不做处理
+		// arr = append(arr, "01")
+		// 手动模式不做处理
 		return
 	case "2":
 		arr = append(arr, "02")

@@ -3,10 +3,11 @@ package util
 import (
 	"bytes"
 	"errors"
-	"gitee.com/sky_big/mylog"
 	"io/ioutil"
 	"net/http"
 	"strings"
+
+	"gitee.com/sky_big/mylog"
 )
 
 func HttpGet(url string) ([]byte, error) {
